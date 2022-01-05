@@ -1,0 +1,46 @@
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ToDo-App</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Meine ToDo Liste</h1>
+    </header>
+    <main>
+      <section>
+        <h2>Filter</h2>
+        <ul>
+          <li>
+            <input
+              type="radio"
+              id="filterAll"
+              name="filter"
+              value="alle"
+            /><label for="filterAll">Alle</label>
+          </li>
+          <li>
+            <input
+              type="radio"
+              id="filterDone"
+              name="filter"
+              value="erledigt"
+            /><label for="filterDone">Erledigt</label>
+          </li>
+          <li>
+            <input
+              type="radio"
+              id="filterNotDone"
+              name="filter"
+              value="nicht-erledigt"
+            /><label for="filterNotDone">Offen</label>
+          </li>
+        </ul>
+      </section>
+    </main>
+    <script src="js/script.js"></script>
+  </body>
+</html>
