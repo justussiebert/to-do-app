@@ -40,6 +40,38 @@
           </li>
         </ul>
       </section>
+      <section>
+        <button type="submit" id="buttonDeleteDoneTodos">
+          Erledigte ToDos löschen
+        </button>
+      </section>
+      <section id="sectionAddToDo">
+        <div>
+          <input
+            type="text"
+            id="inputFieldAddTodo"
+            minlength="5"
+            maxlength="50"
+            placeholder="Hallo"
+          />
+        </div>
+        <div>
+          <button type="submit" id="buttonAddTodo">Neue ToDo anlegen</button>
+        </div>
+      </section>
+      <section>
+        <p>...Liste...</p>
+        <ul id="listToDos">
+          <li>
+            <input type="checkbox" id="x" checked />
+            <label for="x">Nummer null</label>
+          </li>
+          <li>
+            <input type="checkbox" id="y" />
+            <label for="y">Nummer dingens</label>
+          </li>
+        </ul>
+      </section>
     </main>
     <script src="js/script.js"></script>
   </body>

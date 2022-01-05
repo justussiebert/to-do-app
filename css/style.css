@@ -18,6 +18,29 @@ body {
   margin: 0;
   background-color: #fff;
 }
+main {
+  padding: 2vmin;
+}
+section {
+  margin-bottom: 2vmin;
+}
 ul {
   list-style-type: none;
+}
+
+header {
+  background-color: #ccc;
+}
+h1 {
+  text-align: center;
+  margin-top: 0;
+}
+
+#sectionAddToDo {
+  display: flex;
+}
+
+input[type="checkbox"]:checked + label {
+  _color: red;
+  text-decoration: line-through;
 }
