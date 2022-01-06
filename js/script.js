@@ -1,4 +1,5 @@
 const listTodos = document.querySelector("#listToDos");
+const buttonRemoveToDo = document.querySelector("#buttonDeleteDoneTodos");
 const buttonAddToDo = document.querySelector("#buttonAddTodo");
 const inputFieldAddToDo = document.querySelector("#inputFieldAddTodo");
 //const radioChangeFilter = document.querySelector('[name="filter"]:checked').value;
@@ -8,15 +9,28 @@ const stateInit = {
   filter: "alle",
   numberToDos: 0,
 };
-
+/*
 const toDos = [
   { todoText: "nummer eins", done: false },
   { todoText: "nummer zwei", done: false },
   { todoText: "Noch eine Todo", done: true },
 ];
+*/
+const toDos = [];
 
 function addTodo() {
-  const ff = "";
+  //alert("Neue Todo: " + inputFieldAddToDo.value);
+  if (inputFieldAddToDo.value.length > 4) {
+    let objectToPush = {
+      todoText: inputFieldAddToDo.value,
+      done: false,
+    };
+    toDos.push(objectToPush);
+    renderListTodos(stateInit.filter);
+    inputFieldAddToDo.value = "";
+  } else {
+    alert("Die Todo sollte schon aus min. 5 Zeichen bestehen...");
+  }
 }
 
 function updateFilter(filter) {
@@ -26,9 +40,55 @@ function updateFilter(filter) {
   //console.log("Filter aktuell: " + stateInit.filter);
 }
 
-function updateTodo() {}
+function updateTodo() {
+  const listItems = listTodos.getElementsByTagName("li");
+  //const listItems = listTodos.getElementsByTagName("input");
+  //alert(listItems.length);
+  for (let i = 0; i < listItems.length; i++) {
+    let checkBox = document.getElementById("todo-" + i);
 
-//function removeTodo() {}
+    //checkBox.addEventListener("change", function (e) {
+    checkBox.addEventListener("change", function (e) {
+      //alert(checkBox.id);
+      let isDone = true;
+      if (checkBox.checked === true) {
+        //alert("Item: checked");
+      } else {
+        //alert("nicht checked");
+        isDone = false;
+      }
+      toDos[i].done = isDone;
+    });
+    /*
+    
+*/
+    //alert(listItems[i].value);
+  }
+}
+
+listTodos.addEventListener("input", function (e) {
+  //alert("geklickt");
+  updateTodo();
+  renderListTodos(stateInit.filter);
+});
+
+function removeTodo(filterKey, filterValue) {
+  for (let i = 0; i < toDos.length; i++) {
+    //if (toDos[i].filterKey === toDos[i].filterValue) {
+    if (toDos[i].done === true) {
+      //toDos[i] = "";
+      //delete toDos[i];
+      console.log(toDos);
+    }
+
+    //alert("Key: " + toDos[i].done);
+  }
+}
+
+buttonRemoveToDo.addEventListener("click", function (e) {
+  removeTodo("done", "true");
+  renderListTodos(stateInit.filter);
+});
 
 let filteredToDoList;
 
@@ -110,4 +170,17 @@ window.onload = function () {
   //alert("ccc");
   initState();
   renderListTodos(stateInit.filter);
+  /*
+  const checkboxesOfListTodos = document.querySelectorAll(
+    "#listToDos > li > input[type=checkbox]"
+  );
+  alert(checkboxesOfListTodos.length);
+  */
 };
+/*
+function initAll() {
+  //alert("h");
+  //initAll(), setTimeout(1000);
+}
+initAll(), setTimeout(100);
+*/
