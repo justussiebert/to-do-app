@@ -2,10 +2,7 @@ const listTodos = document.querySelector("#listToDos");
 const buttonRemoveToDo = document.querySelector("#buttonDeleteDoneTodos");
 const buttonAddToDo = document.querySelector("#buttonAddTodo");
 const inputFieldAddToDo = document.querySelector("#inputFieldAddTodo");
-let radioFilter = document.querySelectorAll('input[name="filter"]');
-
-let cleanedToDoList = [];
-let filteredToDoList;
+const radioFilter = document.querySelectorAll('input[name="filter"]');
 
 const state = {
   filter: "alle",
@@ -22,11 +19,11 @@ toDos = [
 function addTodo() {
   //alert("Neue Todo: " + inputFieldAddToDo.value);
   if (inputFieldAddToDo.value.length > 4) {
-    let objectToPush = {
+    let newToDo = {
       todoText: inputFieldAddToDo.value,
       done: false,
     };
-    state.toDos.push(objectToPush);
+    state.toDos.push(newToDo);
     renderListTodos(state.filter);
     inputFieldAddToDo.value = "";
   } else {
@@ -60,6 +57,7 @@ listTodos.addEventListener("input", function (e) {
 });
 
 function removeTodo() {
+  let cleanedToDoList = [];
   cleanedToDoList = state.toDos.filter(
     (isDoneOrNot) => isDoneOrNot.done === false
   );
@@ -72,28 +70,36 @@ buttonRemoveToDo.addEventListener("click", function (e) {
 });
 
 // render fresh todo-list in dom
-function renderListTodos(filter) {
+function renderListTodos() {
+  const filter = state.filter;
+  let filteredToDoList;
+  //let filterIsDone = false;
+
   listTodos.innerHTML = "";
-  let filterIsDone = false;
 
   if (filter === "alle") {
     filteredToDoList = state.toDos;
-  } else {
-    if (filter === "erledigt") {
-      filterIsDone = true;
-    }
-
-    filteredToDoList = state.toDos.filter(
-      (isDoneOrNot) => isDoneOrNot.done === filterIsDone
-    );
+  } else if (filter === "erledigt") {
+    //filterIsDone = true;
+    filteredToDoList = state.toDos.filter((todo) => todo.done === true);
+  } else if (filter === "nicht-erledigt") {
+    //filterIsDone = false;
+    filteredToDoList = state.toDos.filter((todo) => todo.done === false);
   }
-
+  //filterIsDone = false;
+  //console.log(filterIsDone);
+  /*
+  filteredToDoList = state.toDos.filter(
+    (isDoneOrNot) => isDoneOrNot.done === filterIsDone
+  );
+*/
   for (let i = 0; i < filteredToDoList.length; i++) {
+    let newContainerTodo = document.createElement("li");
     let textDone = " checked";
     if (!filteredToDoList[i].done === true) {
       textDone = "";
     }
-    let newContainerTodo = document.createElement("li");
+
     newContainerTodo.innerHTML =
       '<input type="checkbox" id="todo-' +
       i +
