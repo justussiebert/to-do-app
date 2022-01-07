@@ -16,7 +16,7 @@ const toDos = [
   { todoText: "Noch eine Todo", done: true },
 ];
 */
-const toDos = [];
+let toDos = [];
 
 function addTodo() {
   //alert("Neue Todo: " + inputFieldAddToDo.value);
@@ -72,17 +72,23 @@ listTodos.addEventListener("input", function (e) {
   renderListTodos(stateInit.filter);
 });
 
+let cleanedToDoList = [];
+
 function removeTodo(filterKey, filterValue) {
+  //let toDosToBeRemovedTmp = [];
   for (let i = 0; i < toDos.length; i++) {
     //if (toDos[i].filterKey === toDos[i].filterValue) {
     if (toDos[i].done === true) {
       //toDos[i] = "";
       //delete toDos[i];
-      console.log(toDos);
     }
-
     //alert("Key: " + toDos[i].done);
   }
+  cleanedToDoList = toDos.filter((isDoneOrNot) => isDoneOrNot.done === false);
+  toDos = cleanedToDoList;
+  //toDos = [];
+  console.log("Bereinigte: " + cleanedToDoList);
+  console.log("neue Liste: " + toDos);
 }
 
 buttonRemoveToDo.addEventListener("click", function (e) {
