@@ -7,17 +7,17 @@ let radioFilter = document.querySelectorAll('input[name="filter"]');
 let cleanedToDoList = [];
 let filteredToDoList;
 
-const stateInit = {
+const state = {
   filter: "alle",
+  toDos: [],
 };
 /*
-const toDos = [
+toDos = [
   { todoText: "nummer eins", done: false },
   { todoText: "nummer zwei", done: false },
   { todoText: "Noch eine Todo", done: true },
 ];
 */
-let toDos = [];
 
 function addTodo() {
   //alert("Neue Todo: " + inputFieldAddToDo.value);
@@ -26,8 +26,8 @@ function addTodo() {
       todoText: inputFieldAddToDo.value,
       done: false,
     };
-    toDos.push(objectToPush);
-    renderListTodos(stateInit.filter);
+    state.toDos.push(objectToPush);
+    renderListTodos(state.filter);
     inputFieldAddToDo.value = "";
   } else {
     alert("Die Todo sollte schon aus min. 5 Zeichen bestehen...");
@@ -35,7 +35,7 @@ function addTodo() {
 }
 
 function updateFilter(filter) {
-  stateInit.filter = filter;
+  state.filter = filter;
   renderListTodos(filter);
 }
 
@@ -48,7 +48,7 @@ function updateTodo() {
       if (checkBox.checked !== true) {
         isDone = false;
       }
-      toDos[i].done = isDone;
+      state.toDos[i].done = isDone;
     });
   }
 }
@@ -56,17 +56,19 @@ function updateTodo() {
 // wenn in der Liste was (checkbox) geklickt wird, also done-status augedated wird...
 listTodos.addEventListener("input", function (e) {
   updateTodo();
-  renderListTodos(stateInit.filter);
+  renderListTodos(state.filter);
 });
 
 function removeTodo() {
-  cleanedToDoList = toDos.filter((isDoneOrNot) => isDoneOrNot.done === false);
-  toDos = cleanedToDoList;
+  cleanedToDoList = state.toDos.filter(
+    (isDoneOrNot) => isDoneOrNot.done === false
+  );
+  state.toDos = cleanedToDoList;
 }
 
 buttonRemoveToDo.addEventListener("click", function (e) {
   removeTodo();
-  renderListTodos(stateInit.filter);
+  renderListTodos(state.filter);
 });
 
 // render fresh todo-list in dom
@@ -75,13 +77,13 @@ function renderListTodos(filter) {
   let filterIsDone = false;
 
   if (filter === "alle") {
-    filteredToDoList = toDos;
+    filteredToDoList = state.toDos;
   } else {
     if (filter === "erledigt") {
       filterIsDone = true;
     }
 
-    filteredToDoList = toDos.filter(
+    filteredToDoList = state.toDos.filter(
       (isDoneOrNot) => isDoneOrNot.done === filterIsDone
     );
   }
@@ -121,7 +123,7 @@ for (let i = 0; i < radioFilter.length; i++) {
 // bei start der Seite: alles frisch aus state holen, also im dom den filter (radio) checken, der laut state gecheckt sein soll
 function initState() {
   for (let i = 0; i < radioFilter.length; i++) {
-    if (stateInit.filter === radioFilter[i].value) {
+    if (state.filter === radioFilter[i].value) {
       radioFilter[i].checked = true;
     }
   }
@@ -131,5 +133,5 @@ function initState() {
 // Liste wird auch neu gerendert, gibt allerdings anfangs keine, könnte aber ja sein, wenn man was in den state bw. todo-array rein schreibt
 window.onload = function () {
   initState();
-  renderListTodos(stateInit.filter);
+  renderListTodos(state.filter);
 };
