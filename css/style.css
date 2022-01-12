@@ -35,6 +35,9 @@ h1 {
   text-align: center;
   margin-top: 0;
 }
+h2 {
+  margin-top: 0;
+}
 
 #sectionAddToDo {
   display: flex;
