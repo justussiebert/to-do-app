@@ -37,7 +37,8 @@ function updateFilter(filter) {
 }
 
 function updateTodo() {
-  const listItems = listTodos.getElementsByTagName("li");
+  //const listItems = listTodos.getElementsByTagName("li");
+  const listItems = listTodos.getElementsByTagName("input");
   for (let i = 0; i < listItems.length; i++) {
     let checkBox = document.getElementById("todo-" + i);
     checkBox.addEventListener("change", function (e) {
@@ -46,14 +47,17 @@ function updateTodo() {
         isDone = false;
       }
       state.toDos[i].done = isDone;
+      renderListTodos(state.filter);
     });
   }
+  //renderListTodos(state.filter);
 }
 
 // wenn in der Liste was (checkbox) geklickt wird, also done-status augedated wird...
 listTodos.addEventListener("input", function (e) {
   updateTodo();
-  renderListTodos(state.filter);
+  console.log(state);
+  //renderListTodos(state.filter);
 });
 
 function removeTodo() {
