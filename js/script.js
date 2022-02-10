@@ -46,17 +46,21 @@ function updateTodo() {
       if (checkBox.checked !== true) {
         isDone = false;
       }
+      console.log("State: ", state);
+      //console.log("isdone: ", isDone);
       state.toDos[i].done = isDone;
+      console.log("item: ", state.toDos[i]);
       renderListTodos(state.filter);
     });
   }
   //renderListTodos(state.filter);
 }
 
-// wenn in der Liste was (checkbox) geklickt wird, also done-status augedated wird...
+// wenn in der Liste was (checkbox) geklickt wird, also done-status upgedated wird...
 listTodos.addEventListener("input", function (e) {
   updateTodo();
-  console.log(state);
+  console.log("checkbox value: ", e.target.checked);
+  //console.log(state);
   //renderListTodos(state.filter);
 });
 

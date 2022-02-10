@@ -20,12 +20,16 @@ body {
 }
 main {
   padding: 2vmin;
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: antiquewhite;
 }
 section {
   margin-bottom: 2vmin;
 }
 ul {
   list-style-type: none;
+  padding-left: 0;
 }
 
 header {
